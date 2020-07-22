@@ -1,0 +1,710 @@
+@mixin dots(
+  $width: 100vw,
+  $height: 100vh,
+  $qty: 100,
+  $blur: 0px,
+  $spread: 0px,
+  $color: currentColor,
+  $offsetY: 0,
+  $offsetX: 0,
+  ) {
+    $dots: ();
+
+    @for $i from 1 through $qty {
+      $top: random() * $height + $offsetY;
+      $left: random() * $width + $offsetX;
+
+      $dots: append(
+        $dots,
+        #{$left $top $blur $spread rgba($color, random())},
+        comma
+      );
+    }
+
+    box-shadow: $dots;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background-color: rgb(245, 245, 245);
+  overflow: hidden;
+  min-width: 1200px;
+}
+
+.table {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgb(164, 115, 62);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 11px,
+      rgba(65,38,9, 0.8) 13px,
+      rgba(65,38,9, 0.8) 13px,
+      transparent 15px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(176,144,92, 0.5) 0px,
+      rgba(150,118,67, 0.5) 5px,
+      rgba(150,118,67, 0.5) 7px,
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(154,119,76, 0.4) 25px,
+      rgba(154,119,76, 0.4), 35px,
+      rgba(205, 160, 106, 0.4) 40px,
+      rgba(205, 160, 106, 0.4) 55px,
+      rgba(154,119,76, 0.4) 60px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(161,129,76, 0.9) 0px,
+      rgba(161,129,76, 0.9) 56px,
+      rgba(136,102,55, 0.9) 60px,
+      rgba(136,102,55, 0.9) 116px,
+      rgba(161,129,76, 0.9) 120px
+    );
+
+  &::before {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    background-image: 
+      repeating-linear-gradient(
+        -25deg,
+        transparent,
+        transparent 2px,
+        rgba(65,38,9, 0.1) 2px,
+        rgba(65,38,9, 0.1) 4px
+      );
+    filter: blur(0.5px);
+    -webkit-mask-image:
+    repeating-linear-gradient(
+      to bottom,
+      red,
+      red 5px,
+      transparent 7px,
+      transparent 9px,
+      red 11px
+    );
+  }
+
+  &::after {
+    content: '';
+    top: calc(50% - 300px);
+    left: calc(50% + 550px);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: absolute;
+    filter: blur(1px);
+    transform: translate(-50%, -50%);
+    background-image:
+      radial-gradient(
+        circle at center,
+        rgba(122,60,39, 0.1) 0%,
+        rgba(122,60,39, 0.3) 45%,
+        rgba(122,60,39, 0.3) 50%,
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at center,
+        rgba(122,60,39, 0.1) 0%,
+        rgba(122,60,39, 0.3) 45%,
+        rgba(122,60,39, 0.3) 50%,
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at center,
+        rgba(122,60,39, 0.1) 0%,
+        rgba(122,60,39, 0.3) 45%,
+        rgba(122,60,39, 0.3) 50%,
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at center,
+        transparent 51%,
+        rgba(122,60,39, 0.7) 55%,
+        rgba(122,60,39, 0.7) 56%,
+        transparent 61%
+      );
+    background-size: 
+      4% 4%,
+      7% 7%,
+      12% 12%,
+      100%;
+    background-position: 
+      55% 58%,
+      60% 60%,
+      65% 68%,
+      50% 50%;
+    background-repeat: no-repeat;
+    -webkit-mask-image:
+    conic-gradient(
+      transparent 5%,
+      red 10%,
+      red 55%,
+      transparent 60%,
+      red 65%,
+      red 69%,
+      transparent 70%,
+      red 71%,
+      red 73%,
+      transparent 75%,
+      red 80%,
+      transparent 90%
+    );
+  }
+}
+
+.paper {
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  &::before {
+    content: '';
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    transform:
+      translate(-3%, -3%)
+      perspective(500px)
+      rotateX(5deg)
+      rotateY(-5deg);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.5);
+  }
+
+  &::after {
+    content: '';
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(238, 238, 238);
+    transform: translate(-50%, -50%);
+    box-shadow: 
+      0px 0px 2px 3px rgba(0,0,0,0.2),
+      5px 5px 2px 0px rgba(0,0,0,0.2);
+
+    background-image:
+      radial-gradient(
+        ellipse at top center,
+        transparent 10%,
+        rgb(223, 221, 221) 11%,
+        rgb(226, 226, 226) 13%,
+        transparent 15%
+      ),
+      linear-gradient(
+        100deg,
+        rgb(230, 230, 230) 35%,
+        rgb(220, 220, 220) 50%,
+        rgb(237, 237, 237) 55%,
+        rgba(230, 230, 230, 0.5) 100%,
+      ),
+      linear-gradient(
+        100deg, 
+        rgba(223, 223, 223, 0.2) 4.5%,
+        rgba(182, 182, 182, 0.2) 5%,
+        rgba(221, 220, 220, 0.2) 8%,
+        transparent 10%
+      ),
+      linear-gradient(
+        145deg, 
+        rgb(223, 223, 223) 6.4%,
+        rgb(211, 211, 211) 7%,
+        rgb(221, 220, 220) 10.5%,
+        transparent 20%
+      ),
+      linear-gradient(
+        -35deg, 
+        rgb(255, 255, 255) 10%,
+        rgb(230, 230, 230) 20%
+      );
+    background-size: 
+      150% 40%,
+      30% 50%,
+      100%,
+      100%,
+      100%;
+    background-position: 
+      -0% -5%,
+      30% 100%,
+      center,
+      center,
+      center;
+    background-repeat: no-repeat;
+  }
+}
+
+.hole {
+  // space
+  > div:first-child {
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: black;
+    overflow: hidden;
+
+    // planets, eh didn't like them
+    div {
+      z-index: 100;
+      border-radius: 50%;
+      background-color: white;
+      box-shadow: inset -2px -2px 2px 0px rgba(0,0,0,0.5);
+      position: absolute;
+      background-image:
+        repeating-radial-gradient(
+          ellipse at top,
+          rgba(0,0,0,0.1),
+          rgba(0,0,0,0.1) 2px,
+          white 2px,
+          white 4px
+        );
+      background-size: 300% 100%;
+      background-position: 50% 0%;
+
+      @for $i from 1 through 6 {
+        $s: (random(50) * 1px);
+        &:nth-child(#{$i}) {
+          width: 20px + $s;
+          height: 20px + $s;
+          top: random(400) * 1px;
+          left: random(400) * 1px
+        }
+      }
+    }
+
+    // stars
+    &::before {
+      content: '';
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      position: absolute;
+      @include dots(400px, 400px, 500, 1px, 0px, white);
+    }
+
+    &::after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      position: absolute;
+      @include dots(400px, 400px, 200, 1px, 0px, white);
+    }
+  }
+
+  // moon
+  > div:last-child {
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: white;
+    box-shadow: 
+      0px 0px 10px 0px rgba(255,255,255,0.5),
+      0px 0px 100px 10px rgba(255,255,255,0.5),
+      inset -7px -10px 20px 15px rgba(196, 195, 195, 0.5),
+      inset -20px -20px 20px 20px rgba(255, 255, 255, 0.7);
+
+    background-image: 
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      ),
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      ),
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      ),
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      ),
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      ),
+      radial-gradient(
+        circle at center,
+        transparent calc(65% - 5px),
+        rgba(196, 196, 196, 0.1) 65%,
+        transparent calc(65% + 5px)
+      );
+    background-size: 
+      200% 200%;
+    background-position:
+      -17% 86%,
+      27% -7%,
+      -15% 50%,
+      100% -14.5%,
+      0% 18.9%,
+      70% -17.8%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+    // crater
+    &::before {
+      content: '';
+      top: 20%;
+      left: 20%;
+      width: 20px;
+      height: 25px;
+      border-radius: 50%;
+      position: absolute;
+      background-color: white;
+      box-shadow: 
+        inset 2px 1px 2px 0px rgba(0, 0, 0, 0.1),
+        0px 0px 10px 5px rgb(237, 237, 237),
+        0px 0px 20px 20px rgba(255, 255, 255, 0.8);
+      transform:
+        perspective(10px)
+        rotateX(5deg)
+        rotateY(-5deg)
+        rotateZ(45deg);
+    }
+  }
+
+  // path, eh didn't like it
+  &::after {
+    // content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    -webkit-mask-image:
+    conic-gradient(
+      transparent 37.5%,
+      red 37.5%,
+      red 62.5%,
+      transparent 62.5%
+    );
+  }
+}
+
+.pen {
+  width: 390px;
+  height: 40px;
+  background-color: red;
+  position: absolute;
+  border-radius: 2% 0 0 2% / 50% 0 0 50%;
+  background-image: 
+    linear-gradient(
+      to bottom,
+      rgb(0, 0, 0) 0%,
+      rgb(68, 68, 68) 30%,
+      rgb(68, 68, 68) 40%,
+      rgb(0, 0, 0) 100%
+    );
+  box-shadow: 
+    inset 2px 0px 0px 0px black,
+    inset 8px 0px 0px 0px rgba(72, 15, 15, 1),
+    inset 10px 0px 0px 0px black;
+
+  &::before {
+    content: '';
+    top: 50%;
+    left: 99.5%;
+    width: 70px;
+    height: 40px;
+    position: absolute;
+    transform: translate(0, -50%);
+    border-radius: 2% 0 0 2% / 50% 0 0 50%;
+    clip-path: polygon(
+      0% 0%,
+      100% 40%,
+      100% 60%,
+      0% 100%
+    );
+    // firefox -.-
+    background-image:
+      linear-gradient(
+        to right,
+        rgb(0, 0, 0) 82%,
+        transparent 82%
+      );
+    background-image: 
+      conic-gradient(
+        at 100% 50%,
+        transparent 71%,
+        rgb(92,90,90) 71%,
+        rgb(220,218,221) 71.5%,
+        rgb(220,218,221) 72%,
+        rgb(27,24,23) 73%,
+        rgb(27,24,23) 75%,
+        rgb(239,236,235) 76%,
+        rgb(239,236,235) 78%,
+        rgb(27,24,23) 79%,
+        rgb(27,24,23) 79.5%,
+        transparent 79.5%
+      );
+    border-left: 1px solid rgb(104, 104, 104);
+  }
+
+  &::after {
+    content: '';
+    top: 50%;
+    left: calc(100% + 56px);
+    width: 15px;
+    height: 6px;
+    position: absolute;
+    transform: translate(0, -50%);
+    border-radius: 5% 50% 50% 5% / 50%;
+    background-color: red;
+    background-image:
+      linear-gradient(
+        to right,
+        transparent 80%,
+        grey 80%
+      ),
+      linear-gradient(
+        to bottom,
+        rgb(92,90,90) 5%,
+        rgb(220,218,221) 5%,
+        rgb(220,218,221) 45%,
+        rgb(27,24,23),
+        rgb(128, 128, 128) 80%
+      );
+    border-left: 1px solid black;
+  }
+}
+
+.shadow {
+  // didn't put much effort into the pen and now I'm paying it
+  // too lazy to fix the z-index and shadow so another div it is :)
+  top: calc(50% + 150px);
+  left: calc(50% - 480px);
+  width: 350px;
+  height: 40px;
+  position: absolute;
+  filter: drop-shadow(-7px 7px 3px rgba(0,0,0,0.5));
+  transform: translate(-50%, -50%) rotateZ(-30deg);
+
+  .pen-thingus {
+    top: 50%;
+    left: 0%;
+    width: 60px;
+    height: 25px;
+    background-color: red;
+    transform: translate(-50%, -50%);
+    border-radius: 10% 0 0 10% / 50% 0 0 50%;
+    position: absolute;
+    background-image: 
+      linear-gradient(
+        to bottom,
+        rgb(92,90,90) 5%,
+        rgb(220,218,221) 20%,
+        rgb(220,218,221) 40%,
+        rgb(27,24,23),
+        rgb(128, 128, 128) 80%
+      );
+  }
+}
+
+.asteroid {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  // ball
+  > div:last-child {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    border: 2px solid black;
+    background-color: white;
+    box-shadow:
+      inset -2px -2px 2px 0px rgba(0,0,0,0.5),
+      inset -5px -5px 5px 0px rgba(0,0,0,0.3),
+      inset -5px -5px 10px 0px rgba(0,0,0,0.2);
+    overflow: hidden;
+
+    // dots containers
+    div {
+      top: 0;
+      left: 0;
+      position: absolute;
+      // border: 1px solid black;
+
+      // dots
+      &::before, &::after {
+        content: '';
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        position: absolute;
+      }
+    }
+
+    // top dots container
+    div:nth-child(1) {
+      width: 25px;
+      height: 25px;
+
+      // dots
+      &::before {
+        @include dots(25px, 25px, 10, 0px, 0px, black);
+      }
+    }
+
+    // bottom dots contianer
+    div:nth-child(2) {
+      top: 25px;
+      width: 50px;
+      height: 25px;
+
+      // dots
+      &::after {
+        @include dots(50px, 12.5px, 50, 0px, 0px, black, 12.5);
+      }
+      &::before {
+        @include dots(50px, 12.5px, 50, 0px, 0px, grey);
+      }
+    }
+
+    // right dots contianer
+    div:nth-child(3) {
+      left: 25px;
+      width: 25px;
+      height: 50px;
+
+      // dots
+      &::after {
+        @include dots(12.5px, 50px, 50, 0px, 0px, black, 0, 12.5);
+      }
+      &::before {
+        @include dots(12.5px, 50px, 50, 0px, 0px, grey);
+      }
+    }
+
+    // diagonal dots contianer
+    div:nth-child(4) {
+      left: 25px;
+      width: 25px;
+      height: 50px;
+      transform: rotateZ(45deg);
+      transform-origin: center left;
+
+      // dots
+      &::after {
+        @include dots(12.5px, 50px, 100, 0px, 0px, black, 0, 12.5);
+      }
+      &::before {
+        @include dots(12.5px, 50px, 100, 0px, 0px, grey);
+      }
+    }
+  }
+
+  // shadow
+  > div:first-child {
+    width: 100px;
+    height: 150px;
+    border-radius: 50%;
+    // border: 1px solid black;
+    position: absolute;
+    background-image: 
+      radial-gradient(
+        circle at center,
+        rgba(0,0,0,0.5),
+        transparent 50%
+      );
+    transform:
+      perspective(10px)
+      rotateX(4deg)
+      rotateY(-4deg)
+      rotateZ(0deg);
+    filter: blur(5px);
+  }
+
+  &:nth-child(4) {
+    top: calc(50% - 120px);
+    left: calc(50% - 300px);
+  }
+
+  &:nth-child(5) {
+    top: calc(50% - 100px);
+    left: calc(50% + 250px);
+  }
+
+  &:nth-child(6) {
+    top: calc(50% + 170px);
+    left: calc(50% - 330px);
+  }
+
+  &:nth-child(7) {
+    top: calc(50% + 30px);
+    left: calc(50% - 80px);
+  }
+
+  &:nth-child(8) {
+    top: calc(50% - 200px);
+    left: calc(50% + 50px);
+  }
+
+  &:nth-child(9) {
+    top: calc(50% + 100px);
+    left: calc(50% + 150px);
+  }
+}
+
+.container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    transform: scale(0.5);
+  }
+  
+  .table::after {
+    top: calc(50% - 150px);
+    left: calc(50% + 275px);
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
